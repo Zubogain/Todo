@@ -1,0 +1,6 @@
+{
+    "require": {
+        "yandex/geo": "^1.1",
+        "twig/twig": "^1.35"
+    }
+}
