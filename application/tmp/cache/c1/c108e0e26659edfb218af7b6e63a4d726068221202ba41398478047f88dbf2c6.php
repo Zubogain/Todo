@@ -17,7 +17,7 @@ class __TwigTemplate_617bcf7118202890dbf50e6b78775458fca2da2186edd88f20632e6d7f1
     {
         // line 1
         echo "<div style=\"display: inline-block; margin-bottom: 1rem;\">
-\t<form method=\"POST\" class=\"form-add\">
+\t<form method=\"POST\" action=\"?/task\" class=\"form-add\">
 \t\t<input type=\"text\" name=\"new_task\" placeholder=\"Описание задачи\">
 \t\t<input type=\"submit\" name=\"do_task\" value=\"Добавить\">
 \t</form>
@@ -45,10 +45,10 @@ class __TwigTemplate_617bcf7118202890dbf50e6b78775458fca2da2186edd88f20632e6d7f1
     public function getSourceContext()
     {
         return new Twig_Source("<div style=\"display: inline-block; margin-bottom: 1rem;\">
-\t<form method=\"POST\" class=\"form-add\">
+\t<form method=\"POST\" action=\"?/task\" class=\"form-add\">
 \t\t<input type=\"text\" name=\"new_task\" placeholder=\"Описание задачи\">
 \t\t<input type=\"submit\" name=\"do_task\" value=\"Добавить\">
 \t</form>
-</div>", "task/add.twig", "/Applications/MAMP/htdocs/composer/application/views/task/add.twig");
+</div>", "task/add.twig", "/Applications/MAMP/htdocs/application/views/task/add.twig");
     }
 }

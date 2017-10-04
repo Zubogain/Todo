@@ -18,7 +18,8 @@ class AuthModel
 	public function countLogins($login)
 	{
 		$sth = $this->db->prepare('SELECT COUNT(`login`) FROM `user` WHERE `login` = ? ');
-		if ($sth->execute(array((string) $login))) {
+		if ($sth->execute(array((string) $login)))
+		{
 			return (int) $sth->fetchColumn();
 		}
 		return false;
@@ -31,8 +32,10 @@ class AuthModel
 	public function signIn($login)
 	{
 		$sth = $this->db->prepare('SELECT `id`, `login`, `password` FROM `user` WHERE `login` = ? ');
-		if ($sth->execute(array((string) $login ))) {
+		if ($sth->execute(array((string) $login )))
+		{
 			$sth->setFetchMode(PDO::FETCH_ASSOC);
+
 			return $sth;
 		}
 		return false;
@@ -45,8 +48,10 @@ class AuthModel
 	public function register($login, $password)
 	{
 		$password = password_hash($password, PASSWORD_DEFAULT);
+
 		$sth = $this->db->prepare('INSERT INTO `user` (`id`, `login`, `password`) VALUES (NULL, ? , ? )');
-		if ($sth->execute(array((string) $login, (string) $password))) {
+		if ($sth->execute(array( (string) $login, $password )))
+		{
 			return true;
 		}
 		return false;

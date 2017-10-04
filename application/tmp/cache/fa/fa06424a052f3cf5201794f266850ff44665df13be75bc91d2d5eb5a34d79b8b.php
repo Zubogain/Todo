@@ -1,7 +1,7 @@
 <?php
 
-/* task/list.twig */
-class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c715ca7 extends Twig_Template
+/* task/list.twig.html */
+class __TwigTemplate_0ad86eaab99a2da63c9d34f54d7899a88e18ebc729358aea4b0141b50cc40626 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -234,7 +234,7 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
 
     public function getTemplateName()
     {
-        return "task/list.twig";
+        return "task/list.twig.html";
     }
 
     public function isTraitable()
@@ -357,6 +357,6 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
             {% endfor %}
         </tbody>
     </table>
-</div>", "task/list.twig", "/Applications/MAMP/htdocs/application/views/task/list.twig");
+</div>", "task/list.twig.html", "/Applications/MAMP/htdocs/application/views/task/list.twig.html");
     }
 }

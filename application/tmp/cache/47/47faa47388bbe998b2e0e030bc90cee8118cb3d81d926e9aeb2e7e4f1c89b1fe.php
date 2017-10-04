@@ -1,7 +1,7 @@
 <?php
 
-/* auth/auth.twig */
-class __TwigTemplate_95390f303bc3c86d40b68a5e4d4b87bb020ea0ea230c47b88e2267612b0cefbc extends Twig_Template
+/* auth/auth.twig.html */
+class __TwigTemplate_80dbc5524723056dc3fcfca9fa223d402a48964d21ab580821d690d880e24d57 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -16,7 +16,7 @@ class __TwigTemplate_95390f303bc3c86d40b68a5e4d4b87bb020ea0ea230c47b88e2267612b0
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "<form method=\"POST\">
+        echo "<form method=\"POST\" action=\"?/auth\">
 \t<input type=\"text\" name=\"login\" placeholder=\"Логин\">
 \t<input type=\"password\" name=\"password\" placeholder=\"Пароль\">
 \t<input type=\"submit\" name=\"sign_in\" value=\"Вход\">
@@ -26,7 +26,7 @@ class __TwigTemplate_95390f303bc3c86d40b68a5e4d4b87bb020ea0ea230c47b88e2267612b0
 
     public function getTemplateName()
     {
-        return "auth/auth.twig";
+        return "auth/auth.twig.html";
     }
 
     public function getDebugInfo()
@@ -44,11 +44,11 @@ class __TwigTemplate_95390f303bc3c86d40b68a5e4d4b87bb020ea0ea230c47b88e2267612b0
 
     public function getSourceContext()
     {
-        return new Twig_Source("<form method=\"POST\">
+        return new Twig_Source("<form method=\"POST\" action=\"?/auth\">
 \t<input type=\"text\" name=\"login\" placeholder=\"Логин\">
 \t<input type=\"password\" name=\"password\" placeholder=\"Пароль\">
 \t<input type=\"submit\" name=\"sign_in\" value=\"Вход\">
 \t<input type=\"submit\" name=\"register\" value=\"Регистрация\">
-</form>", "auth/auth.twig", "/Applications/MAMP/htdocs/composer/application/views/auth/auth.twig");
+</form>", "auth/auth.twig.html", "/Applications/MAMP/htdocs/application/views/auth/auth.twig.html");
     }
 }

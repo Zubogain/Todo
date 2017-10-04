@@ -1,44 +1,72 @@
 <?php
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-
-/**
-* class Router по крайне мере должен быть :)
-*/
 class Router
 {
-	static function logout() // Лучше чем в Router это запихнуть не придумал
+	private $dirConroller = '';
+	private $db = '';
+	private $urls = [];
+	private $twig;
+	function __construct($dirConroller, $db, $twig = null)
 	{
-		session_destroy();
-		header('location: index.php');
+		$this->dirConroller = $dirConroller;
+		$this->db = $db;
+		$this->twig = $twig;
 	}
-
-
-	static function start($db, $twig)
+	/**
+	 * Добавление роутеров
+	 * @param $url урл
+	 * @param $controllerAndAction пример: BookController@getUpdate
+	 */
+	public function get($url, $controllerAndAction, $params = [])
 	{
-		if (!empty($_SESSION['user_login'])) {
-			$controller = new TaskController($db, $twig);
-			$controller->getTodoList();
-			echo '<a href=\'?action=logout\'>Выйти</a>';
-		} else {
-			if (!empty($_GET['action']) and (string) $_GET['action'] == 'auth') {
-				require_once __DIR__ . '/../controllers/auth.php';
-				require_once __DIR__ . '/../models/auth.php';
-
-				$controllerAuth = new AuthController($db, $twig);
-				$controllerAuth->getAuth();
-			} else {
-				echo '<a href=\'?action=auth\'>Войдите на сайт</a>';
+		$this->add('GET', $url, $controllerAndAction, $params);
+	}
+	/**
+	 * Добавление роутеров
+	 * @param $url урл
+	 * @param $controllerAndAction пример: BookController@postUpdate
+	 */
+	public function post($url, $controllerAndAction, $params = [])
+	{
+		$this->add('POST', $url, $controllerAndAction, $params);
+	}
+	/**
+	 * Добавление роутеров
+	 * @param $url урл
+	 * @param $controllerAndAction пример: BookController@list
+	 */
+	public function add($method, $url, $controllerAndAction, $params)
+	{
+		list($controller, $action) = explode('@', $controllerAndAction);
+		$this->urls[$method][$url] = [
+			'controller' => $controller,
+			'action' => $action,
+			'params' => $params
+		];
+	}
+	/**
+	 * Подключение контроллеров
+	 * @param $url текущий урл
+	 */
+	public function run($currentUrl)
+	{
+		if (isset($this->urls[$_SERVER['REQUEST_METHOD']])) {
+			foreach ($this->urls[$_SERVER['REQUEST_METHOD']] as $url => $urlData) {
+				if (preg_match('(^'.$url.'$)', $currentUrl, $matchList)) {
+					$params = [];
+					foreach ($urlData['params'] as $param => $i) {
+						$params[$param] = $matchList[$i];
+					}
+					include $this->dirConroller.$urlData['controller'].'.php';
+					$controller = new $urlData['controller']($this->db, $this->twig);
+					if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+						$actionMethod = $urlData['action'];
+						$controller->$actionMethod($params, $_POST);
+					} else {
+						$actionMethod = $urlData['action'];
+						$controller->$actionMethod($params);
+					}
+				}
 			}
-		}
-
-
-		/**
-		* Проверка события выйти
-		*/
-		if (!empty($_GET['action']) and (string) $_GET['action'] == 'logout') {
-			self::logout();
 		}
 	}
 }
