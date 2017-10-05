@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block head %}
+	<title>Регистрация/Вход</title>
+{% endblock %}
+{% block main %}
+	{% if not notice is empty %}
+		<p>{{ notice }}</p>
+	{% endif %}
+	<form method="POST" action="?/auth">
+		<input type="text" name="login" placeholder="Логин">
+		<input type="password" name="password" placeholder="Пароль">
+		<input type="submit" name="sign_in" value="Вход">
+		<input type="submit" name="register" value="Регистрация">
+	</form>
+{% endblock %}

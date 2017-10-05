@@ -1,14 +1,14 @@
 <?php
 
-/* task/list.twig */
-class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c715ca7 extends Twig_Template
+/* task/index.html */
+class __TwigTemplate_98f2649a605c51ce3e25b9eec6b449f7c3531b18e51b1c5393aabbbc442c78e7 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("base.html", "task/list.twig", 1);
+        $this->parent = $this->loadTemplate("base.html", "task/index.html", 1);
         $this->blocks = array(
             'head' => array($this, 'block_head'),
             'main' => array($this, 'block_main'),
@@ -39,8 +39,20 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
     {
         // line 7
         echo "    ";
-        $this->loadTemplate("task/edit.twig", "task/list.twig", 7)->display($context);
-        // line 8
+        if (((twig_test_empty(($context["editDesc"] ?? null)) && twig_test_empty($this->getAttribute(($context["editDesc"] ?? null), "id", array()))) && twig_test_empty($this->getAttribute(($context["editDesc"] ?? null), "desc", array())))) {
+            // line 8
+            echo "        ";
+            $this->loadTemplate("task/add.html", "task/index.html", 8)->display($context);
+            // line 9
+            echo "    ";
+        } else {
+            // line 10
+            echo "        ";
+            $this->loadTemplate("task/edit.html", "task/index.html", 10)->display($context);
+            // line 11
+            echo "    ";
+        }
+        // line 12
         echo "    <div style=\"display: inline-block; margin-left: 20px;\">
         <form method=\"POST\" action=\"?/task\">
             <label for=\"sort\">Сортировать по:</label>
@@ -67,78 +79,78 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
     \t\t</thead>
             <tbody>
                 ";
-        // line 33
+        // line 37
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["todoArray"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["todoList"]) {
-            // line 34
+            // line 38
             echo "                    ";
             if (($this->getAttribute($context["todoList"], "u_id", array()) == $this->getAttribute(($context["session"] ?? null), "user_id", array()))) {
-                // line 35
+                // line 39
                 echo "                        <tr>
                             <td>";
-                // line 36
+                // line 40
                 echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "description", array()), "html", null, true);
                 echo "</td>
                             <td>";
-                // line 37
+                // line 41
                 echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "date_added", array()), "html", null, true);
                 echo "</td>
                             ";
-                // line 38
+                // line 42
                 if (($this->getAttribute($context["todoList"], "is_done", array()) == 1)) {
-                    // line 39
+                    // line 43
                     echo "                                <td style=\"color: green;\">Выполнено</td>
                             ";
                 } else {
-                    // line 41
+                    // line 45
                     echo "                                <td style=\"color: red;\">Не выполнено</td>
                             ";
                 }
-                // line 43
+                // line 47
                 echo "                            ";
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable(($context["usersArray"] ?? null));
                 foreach ($context['_seq'] as $context["_key"] => $context["usersList"]) {
-                    // line 44
+                    // line 48
                     echo "                                ";
                     if (($this->getAttribute($context["todoList"], "assigned_user_id", array()) == $this->getAttribute($context["usersList"], "id", array()))) {
-                        // line 45
+                        // line 49
                         echo "                                    ";
                         if (($this->getAttribute($context["todoList"], "assigned_user_id", array()) == $this->getAttribute(($context["session"] ?? null), "user_id", array()))) {
-                            // line 46
+                            // line 50
                             echo "                                        <td>Вы</td>
                                     ";
                         } else {
-                            // line 48
+                            // line 52
                             echo "                                        <td>";
                             echo twig_escape_filter($this->env, $this->getAttribute($context["usersList"], "login", array()), "html", null, true);
                             echo "</td>
                                     ";
                         }
-                        // line 50
+                        // line 54
                         echo "                                ";
                     }
-                    // line 51
+                    // line 55
                     echo "                            ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['usersList'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 52
+                // line 56
                 echo "                        <td><a href=\"?/task/action=";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "id", array()), "html", null, true);
                 echo "/edit\">Изменить</a>
                         ";
-                // line 53
+                // line 57
                 if (($this->getAttribute($context["todoList"], "assigned_user_id", array()) == $this->getAttribute(($context["session"] ?? null), "user_id", array()))) {
-                    // line 54
+                    // line 58
                     echo "                            <a href=\"?/task/action=";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "id", array()), "html", null, true);
                     echo "/done\">Выполнить</a>
                         ";
                 }
-                // line 56
+                // line 60
                 echo "                        <a href=\"?/task/action=";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "id", array()), "html", null, true);
                 echo "/delete\">Удалить</a></td>
@@ -146,11 +158,11 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
                             <form method='POST' action=\"?/task\">
                                 <select name=\"assigned_user_id\">
                         ";
-                // line 60
+                // line 64
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable(($context["usersArray"] ?? null));
                 foreach ($context['_seq'] as $context["_key"] => $context["usersList"]) {
-                    // line 61
+                    // line 65
                     echo "                            <option value=\"";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["usersList"], "id", array()), "html", null, true);
                     echo "/";
@@ -163,7 +175,7 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['usersList'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 63
+                // line 67
                 echo "                                </select>
                                 <input type=\"submit\" name=\"assign\" value=\"Переложить ответственность\">
                             </form>
@@ -171,13 +183,13 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
                         </tr>
                     ";
             }
-            // line 69
+            // line 73
             echo "                ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['todoList'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 70
+        // line 74
         echo "    \t\t</tbody>
     \t</table>
     </div>
@@ -196,62 +208,62 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
             </thead>
             <tbody>
                 ";
-        // line 87
+        // line 91
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["todoArray"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["todoList"]) {
-            // line 88
+            // line 92
             echo "                    ";
             if ((($this->getAttribute($context["todoList"], "assigned_user_id", array()) == $this->getAttribute(($context["session"] ?? null), "user_id", array())) && ($this->getAttribute($context["todoList"], "user_id", array()) != $this->getAttribute(($context["session"] ?? null), "user_id", array())))) {
-                // line 89
+                // line 93
                 echo "                        <tr>
                             <td>";
-                // line 90
+                // line 94
                 echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "description", array()), "html", null, true);
                 echo "</td>
                             <td>";
-                // line 91
+                // line 95
                 echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "date_added", array()), "html", null, true);
                 echo "</td>
                             ";
-                // line 92
+                // line 96
                 if (($this->getAttribute($context["todoList"], "is_done", array()) == 1)) {
-                    // line 93
+                    // line 97
                     echo "                                <td style=\"color: green;\">Выполнено</td>
                             ";
                 } else {
-                    // line 95
+                    // line 99
                     echo "                                <td style=\"color: red;\">Не выполнено</td>
                             ";
                 }
-                // line 97
+                // line 101
                 echo "                            <td>";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "login", array()), "html", null, true);
                 echo "</td>
                             <td>
                                 <a href=\"?/task/action=";
-                // line 99
+                // line 103
                 echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "id", array()), "html", null, true);
                 echo "/edit\">Изменить</a>
                                 <a href=\"?/task/action=";
-                // line 100
+                // line 104
                 echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "id", array()), "html", null, true);
                 echo "/done\">Выполнить</a>
                                 <a href=\"?/task/action=";
-                // line 101
+                // line 105
                 echo twig_escape_filter($this->env, $this->getAttribute($context["todoList"], "id", array()), "html", null, true);
                 echo "/delete\">Удалить</a>
                             </td>
                         </tr>
                     ";
             }
-            // line 105
+            // line 109
             echo "                ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['todoList'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 106
+        // line 110
         echo "            </tbody>
         </table>
     </div>
@@ -260,7 +272,7 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
 
     public function getTemplateName()
     {
-        return "task/list.twig";
+        return "task/index.html";
     }
 
     public function isTraitable()
@@ -270,7 +282,7 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
 
     public function getDebugInfo()
     {
-        return array (  255 => 106,  249 => 105,  242 => 101,  238 => 100,  234 => 99,  228 => 97,  224 => 95,  220 => 93,  218 => 92,  214 => 91,  210 => 90,  207 => 89,  204 => 88,  200 => 87,  181 => 70,  175 => 69,  167 => 63,  154 => 61,  150 => 60,  142 => 56,  136 => 54,  134 => 53,  129 => 52,  123 => 51,  120 => 50,  114 => 48,  110 => 46,  107 => 45,  104 => 44,  99 => 43,  95 => 41,  91 => 39,  89 => 38,  85 => 37,  81 => 36,  78 => 35,  75 => 34,  71 => 33,  44 => 8,  41 => 7,  38 => 6,  32 => 3,  29 => 2,  11 => 1,);
+        return array (  267 => 110,  261 => 109,  254 => 105,  250 => 104,  246 => 103,  240 => 101,  236 => 99,  232 => 97,  230 => 96,  226 => 95,  222 => 94,  219 => 93,  216 => 92,  212 => 91,  193 => 74,  187 => 73,  179 => 67,  166 => 65,  162 => 64,  154 => 60,  148 => 58,  146 => 57,  141 => 56,  135 => 55,  132 => 54,  126 => 52,  122 => 50,  119 => 49,  116 => 48,  111 => 47,  107 => 45,  103 => 43,  101 => 42,  97 => 41,  93 => 40,  90 => 39,  87 => 38,  83 => 37,  56 => 12,  53 => 11,  50 => 10,  47 => 9,  44 => 8,  41 => 7,  38 => 6,  32 => 3,  29 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -289,7 +301,11 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
     <link rel=\"stylesheet\" type=\"text/css\" href=\"css/table.css\">
 {% endblock %}
 {% block main %}
-    {% include 'task/edit.twig' %}
+    {% if editDesc is empty and editDesc.id is empty and editDesc.desc is empty %}
+        {% include 'task/add.html' %}
+    {% else %}
+        {% include 'task/edit.html' %}
+    {% endif %}
     <div style=\"display: inline-block; margin-left: 20px;\">
         <form method=\"POST\" action=\"?/task\">
             <label for=\"sort\">Сортировать по:</label>
@@ -391,6 +407,6 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
             </tbody>
         </table>
     </div>
-{% endblock %}", "task/list.twig", "/Applications/MAMP/htdocs/application/views/task/list.twig");
+{% endblock %}", "task/index.html", "/Applications/MAMP/htdocs/application/views/task/index.html");
     }
 }

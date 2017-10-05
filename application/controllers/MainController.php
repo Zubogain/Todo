@@ -6,8 +6,9 @@ class MainController
 {
 	private $twig;
 
-	public function __construct($twig)
+	public function __construct($db, $twig)
 	{
+		$this->db = $db;
 		$this->twig = $twig;
 	}
 
@@ -25,6 +26,7 @@ class MainController
 			header('Location: /?/task');
 			die;
 		}
-		echo "<a href=\"?/auth\">Войдите на сайт</a>";
+		$baseTmp = $this->twig->load('main/index.html');
+		echo $baseTmp->render();
 	}
 }

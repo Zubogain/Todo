@@ -1,14 +1,14 @@
 <?php
 
-/* task/list.twig */
-class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c715ca7 extends Twig_Template
+/* task/index.html.twig */
+class __TwigTemplate_c9695a7922bc6c6b2850bac11693f2df09d9645db39966387d78d0d2cea9c641 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
         parent::__construct($env);
 
         // line 1
-        $this->parent = $this->loadTemplate("base.html", "task/list.twig", 1);
+        $this->parent = $this->loadTemplate("base.html", "task/index.html.twig", 1);
         $this->blocks = array(
             'head' => array($this, 'block_head'),
             'main' => array($this, 'block_main'),
@@ -38,10 +38,8 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
     public function block_main($context, array $blocks = array())
     {
         // line 7
-        echo "    ";
-        $this->loadTemplate("task/edit.twig", "task/list.twig", 7)->display($context);
-        // line 8
-        echo "    <div style=\"display: inline-block; margin-left: 20px;\">
+        echo "    
+    <div style=\"display: inline-block; margin-left: 20px;\">
         <form method=\"POST\" action=\"?/task\">
             <label for=\"sort\">Сортировать по:</label>
             <select name=\"sort_by\">
@@ -260,7 +258,7 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
 
     public function getTemplateName()
     {
-        return "task/list.twig";
+        return "task/index.html.twig";
     }
 
     public function isTraitable()
@@ -270,7 +268,7 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
 
     public function getDebugInfo()
     {
-        return array (  255 => 106,  249 => 105,  242 => 101,  238 => 100,  234 => 99,  228 => 97,  224 => 95,  220 => 93,  218 => 92,  214 => 91,  210 => 90,  207 => 89,  204 => 88,  200 => 87,  181 => 70,  175 => 69,  167 => 63,  154 => 61,  150 => 60,  142 => 56,  136 => 54,  134 => 53,  129 => 52,  123 => 51,  120 => 50,  114 => 48,  110 => 46,  107 => 45,  104 => 44,  99 => 43,  95 => 41,  91 => 39,  89 => 38,  85 => 37,  81 => 36,  78 => 35,  75 => 34,  71 => 33,  44 => 8,  41 => 7,  38 => 6,  32 => 3,  29 => 2,  11 => 1,);
+        return array (  253 => 106,  247 => 105,  240 => 101,  236 => 100,  232 => 99,  226 => 97,  222 => 95,  218 => 93,  216 => 92,  212 => 91,  208 => 90,  205 => 89,  202 => 88,  198 => 87,  179 => 70,  173 => 69,  165 => 63,  152 => 61,  148 => 60,  140 => 56,  134 => 54,  132 => 53,  127 => 52,  121 => 51,  118 => 50,  112 => 48,  108 => 46,  105 => 45,  102 => 44,  97 => 43,  93 => 41,  89 => 39,  87 => 38,  83 => 37,  79 => 36,  76 => 35,  73 => 34,  69 => 33,  41 => 7,  38 => 6,  32 => 3,  29 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -289,7 +287,7 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
     <link rel=\"stylesheet\" type=\"text/css\" href=\"css/table.css\">
 {% endblock %}
 {% block main %}
-    {% include 'task/edit.twig' %}
+    
     <div style=\"display: inline-block; margin-left: 20px;\">
         <form method=\"POST\" action=\"?/task\">
             <label for=\"sort\">Сортировать по:</label>
@@ -391,6 +389,6 @@ class __TwigTemplate_9d5b1b8bbaf782d9fcff7c2f2526040de0b7a7e46e4e9a73993a126a8c7
             </tbody>
         </table>
     </div>
-{% endblock %}", "task/list.twig", "/Applications/MAMP/htdocs/application/views/task/list.twig");
+{% endblock %}", "task/index.html.twig", "/Applications/MAMP/htdocs/application/views/task/index.html.twig");
     }
 }

@@ -21,6 +21,7 @@ class AuthController
 	public function auth()
 	{
 		$view = '';
+		$params = [];
 		if (isset($_SESSION['user_login'])) {
 			header('Location: /?/task');
 			die;
@@ -29,7 +30,7 @@ class AuthController
 
 		if (!empty($_POST['register'])) {
 			if (empty($_POST['login']) or empty($_POST['password'])) {
-				$view .= 'Ошибка регистрации. Введите все необхдоимые данные.';
+				$params['notice'] = 'Ошибка регистрации. Введите все необхдоимые данные.';
 			} else {
 				if ($this->model->countLogins($_POST['login']) === 0) {
 					if ($this->model->register($_POST['login'], $_POST['password'])) {
@@ -40,7 +41,7 @@ class AuthController
 						}
 					}
 				} else {
-					$view .= "<p>Такой пользователь уже существует в базе данных.</p>";
+					$params['notice'] = 'Такой пользователь уже существует в базе данных.';
 				}
 			}
 		}
@@ -52,7 +53,7 @@ class AuthController
 		 */
 		if (!empty($_POST['sign_in'])) {
 			if (empty($_POST['login']) or empty($_POST['password'])) {
-				$view .= 'Ошибка входа. Введите все необхдоимые данные.';
+				$params['notice'] = 'Ошибка входа. Введите все необхдоимые данные.';
 			} else {
 				if ($this->model->countLogins($_POST['login']) === 1) {
 					foreach ($this->model->signIn($_POST['login'], $_POST['password']) as $userInfo) {
@@ -61,16 +62,17 @@ class AuthController
 							$_SESSION['user_id'] = $userInfo['id'];
 							header('Location: /?/task');
 						} else {
-							$view .= "<p>Такой пользователь не существует, либо неверный пароль.</p>";
+							$params['notice'] = "Такой пользователь не существует, либо неверный пароль.";
 							break;
 						}
 					}
 				} else {
-					$view .= "<p>Такой пользователь не существует, либо неверный пароль.</p>";
+					$params['notice'] = 'Такой пользователь не существует, либо неверный пароль.';
 				}
 			}
 		}
-		$view .= $this->twig->render('auth/auth.twig.html');
+		$baseTmp = $this->twig->load('auth/index.html');
+		$view .= $baseTmp->render($params);
 		echo $view;
 	}
 }

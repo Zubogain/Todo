@@ -20,11 +20,11 @@ class TaskController
 	 */
 	public function index()
 	{
+		$view = '';
 		if (!isset($_SESSION['user_login'])) {
 			header('Location: /');
 			die;
 		}
-		$view = '<h3>Дела созданные вами:</h3>'; // Здесь весь сгенерированный html
 
 
 		/**
@@ -59,22 +59,6 @@ class TaskController
 
 
 		/**
-		 * Генерация формы на добавление или изменение в зависимости от события
-		 */
-		if (isset($_GET['/task/action']) and $pie = explode('/', $_GET['/task/action']) and (string) $pie[1] == 'edit') {
-			$descriptionId = '';
-			$descriptionEdit = '';
-			foreach ($this->model->selectTask($pie[0]) as $value) {
-				$descriptionId = $value['id'];
-				$descriptionEdit = $value['description'];
-			}
-			$view .= $this->twig->render('task/edit.twig', ['descriptionId' => $descriptionId, 'descriptionEdit' => $descriptionEdit]);
-		} else {
-			$view .= $this->twig->render('task/add.twig');
-		}
-
-
-		/**
 		 * Переложение ответственности
 		 */
 		if (!empty($_POST['assign']) and !empty($_POST['assigned_user_id'])) {
@@ -83,31 +67,47 @@ class TaskController
 				$this->model->assignUser($pie[0], $pie[1]);
 			}
 		}
+		
+
+		$baseTmp = $this->twig->load('task/index.html');
+		$params = array(
+			'session' => $_SESSION,
+			'get' => $_GET,
+			'post' => $_POST,
+			'todoArray' => $this->model->findAll(),
+			'usersArray' => $this->model->selectAllUsers()
+		);
+		/**
+		 * Генерация формы на добавление или изменение в зависимости от события
+		 */
+		if (isset($_GET['/task/action']) and $pie = explode('/', $_GET['/task/action']) and (string) $pie[1] == 'edit') {
+			foreach ($this->model->selectTask($pie[0]) as $value) {
+				$params['editDesc'] = array('id' => $value['id'], 'desc' => $value['description']);
+				break;
+			}
+		}
 
 
 		/**
 		 * Показываем весь список задач :)
 		 */
-		$todoUsers = $this->model->selectAllUsers();
 		if (!empty($_POST['sort']) and !empty($_POST['sort_by'])) {
 			switch ($_POST['sort_by']) {
 				case 'is_done':
-					$listSort = $this->model->sortTaskDone();
-					$view .= $this->twig->render('task/list.twig', ['todoArray' => $listSort, 'usersArray' => $todoUsers, 'session' => $_SESSION]);
+					$params['todoArray'] = $this->model->sortTaskDone();
+					$view .= $baseTmp->render($params);
 					break;
 				case 'description':
-					$listSort = $this->model->sortTaskDescription();
-					$view .= $this->twig->render('task/list.twig', ['todoArray' => $listSort, 'usersArray' => $todoUsers, 'session' => $_SESSION]);
+					$params['todoArray'] = $this->model->sortTaskDescription();
+					$view .= $baseTmp->render($params);
 					break;
 				default:
-					$listSort = $this->model->sortTaskDateAdded();
-					$view .= $this->twig->render('task/list.twig', ['todoArray' => $listSort, 'usersArray' => $todoUsers, 'session' => $_SESSION]);
+					$params['todoArray'] = $this->model->sortTaskDateAdded();
+					$view .= $baseTmp->render($params);
 					break;
 			}
 		} else {
-			$todo = $this->model->findAll();
-
-			$view .= $this->twig->render('task/list.twig', ['todoArray' => $todo, 'usersArray' => $todoUsers, 'session' => $_SESSION]);
+			$view .= $baseTmp->render($params);
 		}
 		echo $view;
 	}

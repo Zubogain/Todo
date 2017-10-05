@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="main">
+        	{% block main %}{% endblock %}
+        	{% if not session.user_login is empty %}
+        		<a href="?/logout">Выйти</a>
+        	{% endif %}
+        </div>
+    </body>
+</html>
