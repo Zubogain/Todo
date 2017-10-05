@@ -27,28 +27,19 @@ class AuthController
 		}
 
 
-		if (!empty($_POST['register']))
-		{
-			if (empty($_POST['login']) or empty($_POST['password']))
-			{
+		if (!empty($_POST['register'])) {
+			if (empty($_POST['login']) or empty($_POST['password'])) {
 				$view .= 'Ошибка регистрации. Введите все необхдоимые данные.';
-			}
-			else
-			{
-				if ($this->model->countLogins($_POST['login']) === 0)
-				{
-					if ($this->model->register($_POST['login'], $_POST['password']))
-					{
-						foreach ($this->model->signIn($_POST['login'], $_POST['password']) as $userInfo)
-						{
+			} else {
+				if ($this->model->countLogins($_POST['login']) === 0) {
+					if ($this->model->register($_POST['login'], $_POST['password'])) {
+						foreach ($this->model->signIn($_POST['login'], $_POST['password']) as $userInfo) {
 							$_SESSION['user_login'] = $userInfo['login'];
 							$_SESSION['user_id'] = $userInfo['id'];
 							header('Location: /?/task');
 						}
 					}
-				}
-				else
-				{
+				} else {
 					$view .= "<p>Такой пользователь уже существует в базе данных.</p>";
 				}
 			}
@@ -59,33 +50,22 @@ class AuthController
 		/**
 		 * Авторизация
 		 */
-		if (!empty($_POST['sign_in']))
-		{
-			if (empty($_POST['login']) or empty($_POST['password']))
-			{
+		if (!empty($_POST['sign_in'])) {
+			if (empty($_POST['login']) or empty($_POST['password'])) {
 				$view .= 'Ошибка входа. Введите все необхдоимые данные.';
-			}
-			else
-			{
-				if ($this->model->countLogins($_POST['login']) === 1)
-				{
-					foreach ($this->model->signIn($_POST['login'], $_POST['password']) as $userInfo)
-					{
-						if (password_verify($_POST['password'], $userInfo['password']))
-						{
+			} else {
+				if ($this->model->countLogins($_POST['login']) === 1) {
+					foreach ($this->model->signIn($_POST['login'], $_POST['password']) as $userInfo) {
+						if (password_verify($_POST['password'], $userInfo['password'])) {
 							$_SESSION['user_login'] = $userInfo['login'];
 							$_SESSION['user_id'] = $userInfo['id'];
 							header('Location: /?/task');
-						}
-						else
-						{
+						} else {
 							$view .= "<p>Такой пользователь не существует, либо неверный пароль.</p>";
 							break;
 						}
 					}
-				}
-				else
-				{
+				} else {
 					$view .= "<p>Такой пользователь не существует, либо неверный пароль.</p>";
 				}
 			}
