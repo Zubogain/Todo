@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="css/table.css">
 {% endblock %}
 {% block main %}
+    <h1>Здравствуйте, {{ session.user_login }}! Вот ваш список дел:</h1>
     {% if editDesc is empty and editDesc.id is empty and editDesc.desc is empty %}
         {% include 'task/add.html' %}
     {% else %}
